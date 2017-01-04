@@ -47,6 +47,8 @@ MainController::MainController(int argc, char * argv[])
 
     Parse::get().arg(argc, argv, "-l", logFile);
 
+    int logFile_length = logFile.length();
+
     if(logFile.length())
     {
         logReader = new RawLogReader(logFile, Parse::get().arg(argc, argv, "-f", empty) > -1);
@@ -68,12 +70,13 @@ MainController::MainController(int argc, char * argv[])
         }
 #endif
     }
-
+    // add pose ground truth file
     if(Parse::get().arg(argc, argv, "-p", poseFile) > 0)
     {
         groundTruthOdometry = new GroundTruthOdometry(poseFile);
     }
 
+    //variance
     confidence = 10.0f;
     depth = 3.0f;
     icp = 10.0f;
@@ -479,7 +482,11 @@ void MainController::run()
         }
         glColor3f(1, 1, 1);
 
-        eFusion->normaliseDepth(0.3f, gui->depthCutoff->Get());
+        //eFusion->normaliseDepth(0.3f, gui->depthCutoff->Get());
+        //set min value and max value
+        //eFusion->normaliseDepth(0.3f, gui->depthCutoff->Get());
+        std::cout<<"max Value: "<<gui->depthCutoff->Get()<<std::endl;
+        eFusion->normaliseDepth(0.001f,0.08f);
 
         for(std::map<std::string, GPUTexture*>::const_iterator it = eFusion->getTextures().begin(); it != eFusion->getTextures().end(); ++it)
         {

@@ -18,6 +18,8 @@
 
 #include "RawLogReader.h"
 
+using namespace std;
+
 RawLogReader::RawLogReader(std::string file, bool flipColors)
  : LogReader(file, flipColors)
 {
@@ -68,12 +70,15 @@ void RawLogReader::getCore()
 {
     auto tmp = fread(&timestamp,sizeof(int64_t),1,fp);
     assert(tmp);
+    cout<<"timestamp: "<<timestamp<<endl;
 
     tmp = fread(&depthSize,sizeof(int32_t),1,fp);
     assert(tmp);
+
+    cout<<"depthSize: "<<depthSize<<endl;
     tmp = fread(&imageSize,sizeof(int32_t),1,fp);
     assert(tmp);
-
+    cout<<"imageSize: "<<imageSize<<endl;
     tmp = fread(depthReadBuffer,depthSize,1,fp);
     assert(tmp);
 

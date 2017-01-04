@@ -52,6 +52,12 @@ void main()
 	    float sum1 = 0;
 	    float sum2 = 0;
 	    
+	    
+	    //************************************************8
+	    //TO DO: understand this part 
+	    //combine points together
+	    //
+	    
 	    for(int cy = max(y - D / 2, 0); cy < ty; ++cy)
 	    {
 	        for(int cx = max(x - D / 2, 0); cx < tx; ++cx)
