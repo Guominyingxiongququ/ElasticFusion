@@ -31,7 +31,7 @@ void main()
 {
     uint value = uint(texture(gSampler, texcoord.xy));
     
-    if(value > uint(maxD * 1000.0f) || value < 300U)
+    if(value > uint(maxD * 1000.0f) || value < 1U)
     {
         FragColor = 0U;
     }

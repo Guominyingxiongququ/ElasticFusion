@@ -78,7 +78,7 @@ MainController::MainController(int argc, char * argv[])
 
     //variance
     confidence = 10.0f;
-    depth = 3.0f;
+    depth = 0.4f;
     icp = 10.0f;
     icpErrThresh = 5e-05;
     covThresh = 1e-05;
@@ -486,7 +486,7 @@ void MainController::run()
         //set min value and max value
         //eFusion->normaliseDepth(0.3f, gui->depthCutoff->Get());
         std::cout<<"max Value: "<<gui->depthCutoff->Get()<<std::endl;
-        eFusion->normaliseDepth(0.001f,0.08f);
+        eFusion->normaliseDepth(0.001f,0.1f);
 
         for(std::map<std::string, GPUTexture*>::const_iterator it = eFusion->getTextures().begin(); it != eFusion->getTextures().end(); ++it)
         {
